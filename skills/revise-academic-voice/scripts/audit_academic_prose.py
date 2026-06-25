@@ -57,6 +57,7 @@ CAVEAT_MARKERS = [
     "but it also",
     "still",
 ]
+FIRST_PERSON_RE = re.compile(r"\b(?:I|we|We|our|Our|us|my|me)\b")
 NS = {"w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main"}
 
 
@@ -225,6 +226,21 @@ def integration_metrics(body: str) -> dict:
     }
 
 
+def voice_constraint_metrics(body: str) -> dict:
+    matches = []
+    for match in FIRST_PERSON_RE.finditer(body):
+        start = max(0, match.start() - 45)
+        end = min(len(body), match.end() + 45)
+        matches.append({
+            "term": match.group(0),
+            "context": re.sub(r"\s+", " ", body[start:end]).strip(),
+        })
+    return {
+        "first_person_pronoun_count": len(matches),
+        "first_person_pronoun_contexts": matches[:20],
+    }
+
+
 def audit(text: str, references_heading: str) -> dict:
     marker = re.search(rf"(?im)^\s*{re.escape(references_heading)}(?:\s*\([^\n]+\))?\s*$", text)
     if marker:
@@ -246,6 +262,7 @@ def audit(text: str, references_heading: str) -> dict:
             "repeated_four_word_phrases": repeated_ngrams(body),
             "template_signals": template_metrics(body),
             "integration_signals": integration_metrics(body),
+            "voice_constraint_signals": voice_constraint_metrics(body),
         },
         "citations": citation_metrics(body, references) if references else {
             "warning": "No references section detected; citation matching was skipped."
