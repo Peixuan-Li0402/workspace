@@ -34,6 +34,7 @@
 - Keep only useful caveats. If every claim is immediately softened, combine the caveat with the claim or delete it.
 - Add judgment through specific phrasing, not fake personal anecdotes or slang.
 - Add a defensible academic stance when the evidence supports it, for example a critique of what existing benchmarks overemphasize or neglect.
+- If first person is not allowed, replace "in our view," "we argue," and "our experiment" with non-personal stance phrases such as "the main weakness is," "this paper argues," or "the experiment uses."
 - Do not add errors, slang, or fake personal anecdotes.
 
 ## Citations
