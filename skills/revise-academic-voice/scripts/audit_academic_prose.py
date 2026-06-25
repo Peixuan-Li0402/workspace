@@ -12,6 +12,7 @@ from pathlib import Path
 from xml.etree import ElementTree as ET
 
 WORD_RE = re.compile(r"\b[A-Za-z][A-Za-z'-]*\b")
+NUMBER_RE = re.compile(r"\b\d+(?:\.\d+)?\b")
 SENTENCE_SPLIT_RE = re.compile(r"(?<=[.!?])\s+")
 TRANSITIONS = [
     "moreover",
@@ -191,6 +192,39 @@ def template_metrics(body: str) -> dict:
     }
 
 
+def integration_metrics(body: str) -> dict:
+    paragraphs = [p.strip() for p in re.split(r"\n\s*\n", body) if WORD_RE.search(p)]
+    numeric_clusters = []
+    citation_dense_paragraphs = []
+    for index, paragraph in enumerate(paragraphs, start=1):
+        paragraph_without_citations = re.sub(r"\([^()]*(?:19|20)\d{2}[^()]*\)", "", paragraph)
+        paragraph_without_citations = re.sub(
+            r"\b[A-Z][A-Za-z]+(?: et al\.)? \((?:19|20)\d{2}\)",
+            "",
+            paragraph_without_citations,
+        )
+        numbers = NUMBER_RE.findall(paragraph_without_citations)
+        citation_groups = re.findall(r"\(([^()]*(?:19|20)\d{2}[^()]*)\)", paragraph)
+        named_citations = re.findall(r"\b[A-Z][A-Za-z]+(?: et al\.)? \(((?:19|20)\d{2})\)", paragraph)
+        citation_count = sum(max(1, group.count(";") + 1) for group in citation_groups) + len(named_citations)
+        if len(numbers) >= 3:
+            numeric_clusters.append({
+                "paragraph": index,
+                "number_count": len(numbers),
+                "numbers": numbers[:10],
+            })
+        if citation_count >= 4:
+            citation_dense_paragraphs.append({
+                "paragraph": index,
+                "citation_count_estimate": citation_count,
+            })
+    return {
+        "numeric_cluster_paragraphs": numeric_clusters,
+        "citation_dense_paragraphs": citation_dense_paragraphs,
+        "note": "Dense numbers or citations are not automatically wrong; check whether they read like methods roll call or literature bucket sorting.",
+    }
+
+
 def audit(text: str, references_heading: str) -> dict:
     marker = re.search(rf"(?im)^\s*{re.escape(references_heading)}(?:\s*\([^\n]+\))?\s*$", text)
     if marker:
@@ -211,6 +245,7 @@ def audit(text: str, references_heading: str) -> dict:
             "transition_counts": {phrase: lower.count(phrase) for phrase in TRANSITIONS},
             "repeated_four_word_phrases": repeated_ngrams(body),
             "template_signals": template_metrics(body),
+            "integration_signals": integration_metrics(body),
         },
         "citations": citation_metrics(body, references) if references else {
             "warning": "No references section detected; citation matching was skipped."
