@@ -15,6 +15,9 @@
 - Avoid paragraphs that only stack citations.
 - Distinguish semantic, stylistic, perceptual, and legal meanings when the topic requires it.
 - End with a precise gap that the present design can address.
+- Avoid a visibly mechanical funnel where every paragraph has a textbook label: background, problem, literature A, literature B, gap, method, contribution.
+- Let some paragraphs be unequal in length when the evidence naturally needs more or less space.
+- Do not force all contributions into "First, Second, Third" unless the assignment explicitly asks for it.
 
 ## Voice
 
@@ -24,6 +27,9 @@
 - Keep technical terms stable; do not cycle through decorative synonyms.
 - Remove empty emphasis such as "crucial," "groundbreaking," and "unprecedented" unless evidence supports it.
 - Avoid symmetrical three-part sentences in every paragraph.
+- Reduce repeated paragraph openings such as "However," "Therefore," "At the same time," "As a result," and "For this reason."
+- Keep only useful caveats. If every claim is immediately softened, combine the caveat with the claim or delete it.
+- Add judgment through specific phrasing, not fake personal anecdotes or slang.
 - Do not add errors, slang, or fake personal anecdotes.
 
 ## Citations
@@ -41,4 +47,3 @@
 - Read once aloud for rhythm.
 - Run the bundled audit.
 - Confirm that no claim depends on an AI detector score.
-
