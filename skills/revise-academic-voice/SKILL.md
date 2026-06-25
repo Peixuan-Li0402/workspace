@@ -32,12 +32,17 @@ Improve the writing by improving its evidence, reasoning, and ownership. Never o
    - avoid ornamental synonyms and repeated transition formulas;
    - break overly perfect paragraph symmetry when the argument can flow more naturally;
    - replace mechanical contribution triads with a single grounded value statement when possible;
+   - interleave literatures around tensions or disagreements instead of giving each source cluster its own drawer;
+   - keep exact sample counts in the methods section unless the introduction needs them for scale;
    - keep necessary limits, but avoid turning every claim into a disclaimer;
    - do not introduce grammar errors to imitate a student.
 6. Run a formulaic-structure pass:
    - Does each paragraph have an obvious template job rather than a local reason to exist?
+   - Do literature paragraphs merely sort citations into tidy buckets such as "creativity," "metrics," and "memorization"?
+   - Could two source clusters be made to collide, for example by showing how a measurement tool fails to answer a memorization or authorship question?
    - Do consecutive paragraphs begin with the same stock transition pattern?
    - Does the ending use "This paper makes three contributions" or a similar list formula?
+   - Does the introduction end with a dense roll call of exact sample counts that belongs in Methods?
    - Is the prose too perfectly balanced, with every claim immediately cancelled by a caveat?
    - If yes, merge, split, shorten, or re-order sentences so the argument sounds revised by a real writer.
 7. Verify every in-text citation against the reference list and every study-specific number against the evidence ledger.
@@ -53,6 +58,7 @@ Run three independent checks:
 - Readability check: sentence-length distribution, very long sentences, very short sentences, and estimated reading level.
 - Evidence check: in-text/reference consistency plus project-number and method alignment.
 - Template check: rigid funnel paragraphs, contribution-list formulas, repeated paragraph-start transitions, and excessive caveat balancing.
+- Integration check: source clusters should cross-reference each other, and numeric detail should support scale rather than feel like a methods-table announcement.
 
 For detailed review criteria, read [references/revision_checklist.md](references/revision_checklist.md).
 
