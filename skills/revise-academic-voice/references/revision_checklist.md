@@ -18,6 +18,9 @@
 - Avoid a visibly mechanical funnel where every paragraph has a textbook label: background, problem, literature A, literature B, gap, method, contribution.
 - Let some paragraphs be unequal in length when the evidence naturally needs more or less space.
 - Do not force all contributions into "First, Second, Third" unless the assignment explicitly asks for it.
+- Check whether literature groups are too tidy. If one paragraph is only creativity studies, the next only metrics, and the next only memorization, try linking them through a shared tension.
+- Prefer "source A creates a problem that source B cannot solve" over "source A says X; source B says Y."
+- Put exact sample counts in the introduction only when they change the reader's understanding of the argument. Otherwise, use a scale phrase and leave exact numbers to Methods.
 
 ## Voice
 
@@ -30,6 +33,7 @@
 - Reduce repeated paragraph openings such as "However," "Therefore," "At the same time," "As a result," and "For this reason."
 - Keep only useful caveats. If every claim is immediately softened, combine the caveat with the claim or delete it.
 - Add judgment through specific phrasing, not fake personal anecdotes or slang.
+- Add a defensible academic stance when the evidence supports it, for example a critique of what existing benchmarks overemphasize or neglect.
 - Do not add errors, slang, or fake personal anecdotes.
 
 ## Citations
