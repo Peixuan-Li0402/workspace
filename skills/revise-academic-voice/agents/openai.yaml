@@ -1,5 +1,4 @@
 interface:
   display_name: "Revise Academic Voice"
-  short_description: "Source-grounded academic prose revision"
-  default_prompt: "Use $revise-academic-voice to revise my draft into clear, source-grounded academic English."
-
+  short_description: "Less formulaic, source-grounded academic revision"
+  default_prompt: "Use $revise-academic-voice to revise my draft into clear, source-grounded academic English without making it sound over-polished or template-heavy."
