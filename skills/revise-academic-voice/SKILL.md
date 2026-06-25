@@ -34,12 +34,14 @@ Improve the writing by improving its evidence, reasoning, and ownership. Never o
    - replace mechanical contribution triads with a single grounded value statement when possible;
    - interleave literatures around tensions or disagreements instead of giving each source cluster its own drawer;
    - keep exact sample counts in the methods section unless the introduction needs them for scale;
+   - if the user or assignment bans first person, convert "in our view" or "we argue" into non-personal stance language rather than deleting the stance;
    - keep necessary limits, but avoid turning every claim into a disclaimer;
    - do not introduce grammar errors to imitate a student.
 6. Run a formulaic-structure pass:
    - Does each paragraph have an obvious template job rather than a local reason to exist?
    - Do literature paragraphs merely sort citations into tidy buckets such as "creativity," "metrics," and "memorization"?
    - Could two source clusters be made to collide, for example by showing how a measurement tool fails to answer a memorization or authorship question?
+   - Does the stance depend on first-person phrasing when the paper should avoid first person?
    - Do consecutive paragraphs begin with the same stock transition pattern?
    - Does the ending use "This paper makes three contributions" or a similar list formula?
    - Does the introduction end with a dense roll call of exact sample counts that belongs in Methods?
@@ -59,6 +61,7 @@ Run three independent checks:
 - Evidence check: in-text/reference consistency plus project-number and method alignment.
 - Template check: rigid funnel paragraphs, contribution-list formulas, repeated paragraph-start transitions, and excessive caveat balancing.
 - Integration check: source clusters should cross-reference each other, and numeric detail should support scale rather than feel like a methods-table announcement.
+- Voice constraint check: first-person pronouns should be absent when the user requests impersonal academic style.
 
 For detailed review criteria, read [references/revision_checklist.md](references/revision_checklist.md).
 
