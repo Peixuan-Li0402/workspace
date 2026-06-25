@@ -25,6 +25,37 @@ TRANSITIONS = [
     "in this context",
     "as a result",
 ]
+PARAGRAPH_START_TRANSITIONS = [
+    "however",
+    "therefore",
+    "moreover",
+    "furthermore",
+    "in addition",
+    "at the same time",
+    "for this reason",
+    "as a result",
+    "taken together",
+]
+CONTRIBUTION_FORMULAS = [
+    "the paper makes three contributions",
+    "this paper makes three contributions",
+    "this study makes three contributions",
+    "the paper contributes in three ways",
+    "this study contributes in three ways",
+    "first,",
+    "second,",
+    "third,",
+]
+CAVEAT_MARKERS = [
+    "does not attempt",
+    "cannot decide",
+    "cannot be turned into",
+    "not the same as",
+    "should not be",
+    "rather than",
+    "but it also",
+    "still",
+]
 NS = {"w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main"}
 
 
@@ -127,6 +158,39 @@ def repeated_ngrams(body: str, n: int = 4) -> list[dict]:
     ][:20]
 
 
+def template_metrics(body: str) -> dict:
+    paragraphs = [p.strip() for p in re.split(r"\n\s*\n", body) if WORD_RE.search(p)]
+    paragraph_starts: dict[str, int] = {}
+    for paragraph in paragraphs:
+        first_words = " ".join(WORD_RE.findall(paragraph.lower())[:5])
+        for phrase in PARAGRAPH_START_TRANSITIONS:
+            if first_words.startswith(phrase):
+                paragraph_starts[phrase] = paragraph_starts.get(phrase, 0) + 1
+
+    lower = body.lower()
+    first_second_third_chain = all(token in lower for token in ["first,", "second,", "third,"])
+    formula_hits = {
+        phrase: lower.count(phrase)
+        for phrase in CONTRIBUTION_FORMULAS
+        if lower.count(phrase)
+    }
+    caveat_hits = {
+        phrase: lower.count(phrase)
+        for phrase in CAVEAT_MARKERS
+        if lower.count(phrase)
+    }
+    paragraph_lengths = [len(WORD_RE.findall(p)) for p in paragraphs]
+    return {
+        "paragraph_count": len(paragraphs),
+        "paragraph_length_words": paragraph_lengths,
+        "paragraph_length_stdev": round(statistics.pstdev(paragraph_lengths), 2) if paragraph_lengths else 0,
+        "paragraph_start_transitions": paragraph_starts,
+        "contribution_formula_hits": formula_hits,
+        "first_second_third_chain_present": first_second_third_chain,
+        "caveat_marker_hits": caveat_hits,
+    }
+
+
 def audit(text: str, references_heading: str) -> dict:
     marker = re.search(rf"(?im)^\s*{re.escape(references_heading)}(?:\s*\([^\n]+\))?\s*$", text)
     if marker:
@@ -146,6 +210,7 @@ def audit(text: str, references_heading: str) -> dict:
         "prose_patterns": {
             "transition_counts": {phrase: lower.count(phrase) for phrase in TRANSITIONS},
             "repeated_four_word_phrases": repeated_ngrams(body),
+            "template_signals": template_metrics(body),
         },
         "citations": citation_metrics(body, references) if references else {
             "warning": "No references section detected; citation matching was skipped."
@@ -175,4 +240,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
